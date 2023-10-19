@@ -45,11 +45,11 @@ const Home = () => {
     rating,
   } = useSelector((state) => state.productPagination);
 
-  const alert = useAlert();
+  const alert = useAlert(); //creamos un objeto de tipo alert
  
 
   useEffect(() => {
-    if (error != null) return alert.error(error);
+    if (error != null) return alert.error(error);  //añadimos esta condicion de control de errores. el input error se obtiene desde el useSelector
     dispatch(getProductPagination({
         pageIndex: pageIndex,
         pageSize: pageSize,
@@ -63,8 +63,8 @@ const Home = () => {
     );
   }, [
     dispatch,
-    error,
-    alert,
+    error,  //cada vez que cambie el estado 'error' se va a volver a ejecutar la logica del useEffect
+    alert,  //cada vez que cambie el estado 'alert' se va a volver a ejecutar la logica del useEffect
     search,
     pageSize,
     resultByPage,
