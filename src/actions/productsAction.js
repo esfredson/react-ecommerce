@@ -7,7 +7,7 @@ export const getProducts = createAsyncThunk(
   "products/getProducts",
   async (ThunkApi, { rejectWithValue }) => {
     try {
-      await delayedTimeout(1000);
+      await delayedTimeout(1000); // consume esta funcion de utilidad para poder ver en accion al componente Loader (utiliza await porque trabaja con una promesa)
       return await axios.get(`/api/v1/product/list`);
     }
     catch (err) {

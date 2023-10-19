@@ -16,7 +16,13 @@ const Home = () => {
 
   const dispatch = useDispatch();
 
+//antes de añadir el componente Loader:
+//const { products } = useSelector((state) => state.products);
+
+//después de añadir el componente Loader:
 //const {products, loading, error} = useSelector((state) => state.products);
+
+
   
   const [precio, setPrecio] = useState([1, 10000]);
 
@@ -88,6 +94,11 @@ const Home = () => {
   function onChangeStar(star) {
     dispatch(updateRating({ rating: star }));
   }
+
+  // if(loading)
+  // {
+  //   return (<Loader);
+  // }
 
   return (
     <Fragment>
