@@ -15,12 +15,14 @@ const Range = createSliderWithTooltip(Slider.Range);
 const Home = () => {
 
   const dispatch = useDispatch();
+
+//const {products, loading, error} = useSelector((state) => state.products);
   
   const [precio, setPrecio] = useState([1, 10000]);
 
   const { categories } = useSelector((state) => state.category);
 
-  //const {products, loading, error} = useSelector((state) => state.products);
+
 
   const {
     products,
@@ -38,7 +40,7 @@ const Home = () => {
   } = useSelector((state) => state.productPagination);
 
   const alert = useAlert();
-  console.log("error===>", error);
+ 
 
   useEffect(() => {
     if (error != null) return alert.error(error);
@@ -92,6 +94,18 @@ const Home = () => {
       <MetaData titulo={"Los mejores productos online"} />
       <section id="products" className="container mt-5">
         <div className="row">
+
+          {/* {products
+          ? products.map(
+            (productElement) => (
+            <Product key={productElement.id} product={productElement} col={4} />  )
+          )
+          : 'No tiene products'
+          } */}
+
+          {/* Hasta aqui el segundo commit (crear el product component en la home page) */}
+
+
           {search ? (
             <React.Fragment>
               <div className="col-6 col-md-3 mt-5 mb-5">
