@@ -6,19 +6,22 @@ import { useAlert } from "react-alert";
 import Loader from "../layout/Loader";
 import { Carousel } from "react-bootstrap";
 
+//creo este nuevo componente para renderizar el detalle de producto
 const ProductDetail = () => {
   const dispatch = useDispatch();
 
-  const alert = useAlert();
+  const alert = useAlert(); //instanciamos el 'useAlert' para obtener las notificaciones de error
 
+  // para obtener el parametro 'id' que se envia dentro de la url
   const { id } = useParams();
 
+  // para obtener la data del detalle de producto desde el reducer 'product' del store
   const { loading, error, product } = useSelector((state) => state.product);
 
   useEffect(() => {
     dispatch(getProductById(id));
     if (error != null) alert.error(error);
-  }, [dispatch, alert, error, id]);
+  }, [dispatch, alert, error, id]);  //indicamos las variables que van a disparar los valores obtenidos en el 'useEffect'
 
   if (!product || loading) return <Loader />;
 
@@ -26,15 +29,17 @@ const ProductDetail = () => {
     <div className="row f-flex justify-content-around">
       <div className="col-12 col-lg-5 img-fluid" id="product_image">
         <Carousel pause="hover">
-          {product.images.map((image) => (
-            <Carousel.Item key={image.id}>
-              <img
-                className="d-block w-100"
-                src={image.url}
-                alt={product.nombre}
-              />
-            </Carousel.Item>
-          ))}
+          {
+            product.images.map((image) => (
+              <Carousel.Item key={image.id}>
+                <img
+                  className="d-block w-100"
+                  src={image.url}
+                  alt={product.nombre}
+                />
+              </Carousel.Item>
+            ))
+          }
         </Carousel>
       </div>
 
@@ -83,7 +88,9 @@ const ProductDetail = () => {
             id="stock_status"
             className={product.stock > 0 ? "greenColor" : "redColor"}
           >
-            {product.stock > 0 ? "En Stock" : "Fuera de Stock"}
+            {
+              product.stock > 0 ? "En Stock" : "Fuera de Stock"
+            }
           </span>
         </p>
 

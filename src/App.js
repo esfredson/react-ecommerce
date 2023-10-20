@@ -26,7 +26,9 @@ function App() {
         <div className="container container-fluid">
           <Routes>
             <Route path="/" element={<Home />} />
+            {/* agrego esta nueva ruta para obtener el detalle de producto */}
             <Route path="/product/:id" element={<ProductDetail />} />
+            
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>

@@ -35,7 +35,7 @@ const Product = ({ product, col }) => {
           <Link
             id="view_btn"
             className="btn btn-block"
-            to={`/product/${product.id}`}
+            to={`/product/${product.id}`} //agrego esta logica para acceder al compoenente 'ProductDetail'
           >
             Ver Detalles
           </Link>
