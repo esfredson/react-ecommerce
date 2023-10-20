@@ -16,6 +16,7 @@ export const getProducts = createAsyncThunk(
   }
 );
 
+// creo este metodo para obtener el detalle de producto
 export const getProductById = createAsyncThunk(
   "products/getProductId",
   async (id, { rejectWithValue }) => {

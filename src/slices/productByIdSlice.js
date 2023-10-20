@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getProductById } from "../actions/productsAction";
 
-
+// creo este slice para obtener el estado del detalle de producto
 export const initialState = {
     product: null,
     loading: false,
@@ -12,23 +12,23 @@ export const productByIdSlice = createSlice({
     name: "productByIdSlice",
     initialState,
     reducers: {
-        resetGetById: (state, action) => {
+        resetGetById: (state, action) => { //reducer local
             state.loading = false;
             state.error = null;
             state.product = null;
         }
     },
-    extraReducers: {
-        [getProductById.pending]: (state) => {
+    extraReducers: {  // reducers remotos
+        [getProductById.pending]: (state) => { // utiliza el nuevo action para obtener el detalle de producto
             state.loading = true;
             state.error = null;
         },
-        [getProductById.fulfilled]: (state, {payload}) => {
+        [getProductById.fulfilled]: (state, {payload}) => { // utiliza el nuevo action para obtener el detalle de producto
             state.loading = false;
             state.product = payload.data;
             state.error = null;
         },
-        [getProductById.rejected]: (state, action) => {
+        [getProductById.rejected]: (state, action) => { // utiliza el nuevo action para obtener el detalle de producto
             state.loading = false;
             state.error = action.payload;
         },

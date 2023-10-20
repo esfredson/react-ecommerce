@@ -8,7 +8,7 @@ import { securityReducer } from "./slices/securitySlice";
 export default configureStore({
   reducer: {
     products: productsReducer,
-    product: productByIdReducer,
+    product: productByIdReducer, // registramos este nuevo reducer
     productPagination: productPaginationReducer,
     category: categoryReducer,
     security: securityReducer,
