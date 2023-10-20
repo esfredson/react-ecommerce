@@ -95,6 +95,7 @@ const Home = () => {
     dispatch(updateRating({ rating: star }));
   }
 
+  //esta consicion ya no se necesita porque ya esta contemplada en el componente 'Products'
   // if(loading)
   // {
   //   return (<Loader);
@@ -106,6 +107,7 @@ const Home = () => {
       <section id="products" className="container mt-5">
         <div className="row">
 
+          {/* Este bloque ya no se necesita porque hemos creado el componente 'Products' */}
           {/* {products
           ? products.map(
             (productElement) => (
@@ -113,8 +115,10 @@ const Home = () => {
           )
           : 'No tiene products'
           } */}
-
           {/* Hasta aqui el segundo commit (crear el product component en la home page) */}
+
+
+          {/* <Products col={4} products={products} loading={loading} /> */}
 
 
           {search ? (
