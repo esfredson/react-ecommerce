@@ -1,26 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getProductPagination } from "../actions/productsAction";
 
-export const initialState = {
-  products: [],
-  loading: false,
-  error: null,
-  count: 0,
-  pageIndex: 1,
-  pageSize: 2,
-  pageCount: 0,
-  resultByPage: 0,
-  search: null,
-  precioMax: null,
-  precioMin: null,
-  category: null,
-  rating: null,
-};
+// creamos la gestion de estados de la paginacion de productos
+export const initialState = { products: [], loading: false, error: null,
+                              count: 0, pageIndex: 1, pageSize: 4, pageCount: 0, resultByPage: 0,
+                              search: null, precioMax: null, precioMin: null, category: null, rating: null,
+                            };
 
 export const productPaginationSlice = createSlice({
   name: "getProductPagination",
   initialState,
   reducers: {
+    // bloque de reducers locales
     searchPagination: (state, action) => {
       state.search = action.payload.search;
       state.pageIndex = 1;
@@ -52,6 +43,7 @@ export const productPaginationSlice = createSlice({
       state.rating = action.payload.rating;
     },
   },
+  // bloque de reducers remotos
   extraReducers: {
     [getProductPagination.pending]: (state) => {
       state.loading = true;
@@ -76,13 +68,8 @@ export const productPaginationSlice = createSlice({
   },
 });
 
-export const {
-  searchPagination,
-  setPageIndex,
-  resetPagination,
-  updatePrecio,
-  updateCategory,
-  updateRating,
-} = productPaginationSlice.actions;
+export const { searchPagination, setPageIndex, resetPagination, updatePrecio,
+               updateCategory, updateRating,
+             } = productPaginationSlice.actions;
 
 export const productPaginationReducer = productPaginationSlice.reducer;
