@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../utilities/axios";
 import { delayedTimeout } from "../utilities/delayedTimeout";
 
+// creacion del action para el usuario
 export const login = createAsyncThunk(
   "user/login",
   async (params, { rejectWithValue }) => {
@@ -11,16 +12,18 @@ export const login = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
+
       const { data } = await axios.post(
         `/api/v1/usuario/login`,
         params,
         requestConfig
       );
 
+      // almacenamos el token del usuario dentro del storage del browser
       localStorage.setItem("token", data.token);
-
       await delayedTimeout(1000);
       return data;
+
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
