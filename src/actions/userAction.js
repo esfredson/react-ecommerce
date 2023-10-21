@@ -108,6 +108,7 @@ export const loadUser = createAsyncThunk(
   }
 );
 
+// permite actualizar el password de un usuario
 export const updatePassword = createAsyncThunk(
   "user/updatePassword",
   async (params, { rejectWithValue }) => {
@@ -117,6 +118,8 @@ export const updatePassword = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
+
+      // metodo de tipo put (actualizacion)
       const { data } = await axios.put(
         `/api/v1/usuario/updatepassword`,
         params,
@@ -124,12 +127,14 @@ export const updatePassword = createAsyncThunk(
       );
 
       return data;
+
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
   }
 );
 
+// metodo para cuando olvido el password
 export const forgotSendPassword = createAsyncThunk(
   "user/forgotPassword",
   async (params, { rejectWithValue }) => {
@@ -139,6 +144,8 @@ export const forgotSendPassword = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
+
+      // endpoint desarrollado y probado en el backend
       const { data } = await axios.post(
         `/api/v1/usuario/forgotpassword`,
         params,
@@ -146,12 +153,14 @@ export const forgotSendPassword = createAsyncThunk(
       );
 
       return data;
+
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
   }
 );
 
+// metodo para resetear el password
 export const resetPassword = createAsyncThunk(
   "user/resetPassword",
   async ({ email, password, confirmPassword, token }, { rejectWithValue }) => {
@@ -162,6 +171,7 @@ export const resetPassword = createAsyncThunk(
         },
       };
 
+      // creo un objeto de tipo request
       const request = {
         email,
         password,
@@ -171,11 +181,13 @@ export const resetPassword = createAsyncThunk(
 
       const { data } = await axios.post(
         `/api/v1/usuario/resetpassword`,
+        // ya no es params sino el objeto request creado arriba
         request,
         requestConfig
       );
 
       return data;
+
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
