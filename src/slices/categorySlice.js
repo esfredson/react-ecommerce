@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getCategories } from "../actions/categoryAction";
 
+// creamos el slice state function para las categorias 
 export const initialState = {
   categories: [],
   loading: false,

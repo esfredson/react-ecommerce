@@ -9,8 +9,8 @@ export default configureStore({
   reducer: {
     products: productsReducer,
     product: productByIdReducer, // registramos este nuevo reducer
-    productPagination: productPaginationReducer, // registramos el pagination reduver
-    category: categoryReducer,
+    productPagination: productPaginationReducer, // registramos el pagination reducer
+    category: categoryReducer, // registramos el category reducer
     security: securityReducer,
   },
   middleware: (getDefaultMiddleware) =>
