@@ -1,3 +1,6 @@
+// lee cada parametro capturado en la pagina producto y lo agrega en un string
+// devuelve el obj ya debidamente concatenado con los parametros
+
 export const httpParams = (obj) => {
     Object.keys(obj).forEach((k) => (!obj[k] && obj[k] !== undefined) && delete obj[k]);
   
