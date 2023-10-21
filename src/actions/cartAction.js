@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../utilities/axios";
 
+// creo este archivo para albergar el action de la direccion del usuario
 export const saveAddressInfo = createAsyncThunk(
   "shopingCart/saveAddressInfo",
   async (params, { rejectWithValue }) => {
@@ -18,6 +19,7 @@ export const saveAddressInfo = createAsyncThunk(
       );
 
       return data;
+      
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
