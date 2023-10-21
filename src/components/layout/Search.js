@@ -1,20 +1,22 @@
 import React, { useState } from "react";
-import {
-  resetPagination,
-  searchPagination,
-} from "../../slices/productPaginationSlice";
+import { resetPagination, searchPagination, } from "../../slices/productPaginationSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
+// creamos este nuevo componente
 const Search = () => {
   const dispatch = useDispatch();
+
   const navigate = useNavigate();
+  
   const [keyword, setKeyword] = useState("");
 
   const searchHandler = (e) => {
     e.preventDefault();
     if (keyword.trim()) {
-      dispatch(searchPagination({ search: keyword }));
+      dispatch(searchPagination(
+        { search: keyword }
+      ));
     } else {
       dispatch(resetPagination());
     }

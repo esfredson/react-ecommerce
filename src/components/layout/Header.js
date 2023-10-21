@@ -26,6 +26,7 @@ const Header = () => {
           </div>
         </div>
 
+        {/* sustituyo el html estatico en el Header por el nuevo componente creado Search */}
         <div className="col-12 col-md-6 mt-2 mt-md-0">
           <Search />
         </div>
