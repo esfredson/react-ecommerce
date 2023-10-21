@@ -5,10 +5,11 @@ import { getProductPagination } from "../actions/productsAction";
 import { useAlert } from "react-alert";
 import Products from "./products/Products";
 import Pagination from "react-js-pagination";
-import {  setPageIndex,  updateCategory,  updatePrecio,  updateRating,} from "../slices/productPaginationSlice";
+import { setPageIndex, updateCategory, updatePrecio, updateRating,} from "../slices/productPaginationSlice";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
+// creo el objeto Slider y el objeto Range desde la libreria rc-slider
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
 
@@ -16,6 +17,7 @@ const Home = () => {
 
   const dispatch = useDispatch();
 
+  // seteo a nivel local la variable de estado precio
   const [precio, setPrecio] = useState([1, 10000]);
 
   const { categories } = useSelector((state) => state.category);
@@ -61,12 +63,16 @@ const Home = () => {
     ));
   }
 
+  //actualiza la variable de estado local precio
   function onChangePrecio(precioEvent) {
     setPrecio(precioEvent);
   }
 
+  // actualiza la variable de estado global precio
   function onAfterChange(precioEvent) {
-    dispatch(updatePrecio({ precio: precioEvent }));
+    dispatch(updatePrecio(
+      { precio: precioEvent }
+    ));
   }
 
   function onChangeCategory(cat) {
@@ -83,24 +89,13 @@ const Home = () => {
       <section id="products" className="container mt-5">
         <div className="row">
 
-          {/* Este bloque ya no se necesita porque hemos creado el componente 'Products' */}
-          {/* {products
-          ? products.map(
-            (productElement) => (
-            <Product key={productElement.id} product={productElement} col={4} />  )
-          )
-          : 'No tiene products'
-          } */}
-          {/* Hasta aqui el segundo commit (crear el product component en la home page) */}
-
-
-          {/* <Products col={4} products={products} loading={loading} /> */}
-
-
-          {search ? (
+        {search
+          ?
+          (
             <React.Fragment>
               <div className="col-6 col-md-3 mt-5 mb-5">
                 <div className="px-5">
+                  {/* el componente Range es importado desde rc-slider */}
                   <Range
                     marks={{ 1: `$1`, 10000: `$10000` }}
                     min={1}
@@ -115,6 +110,7 @@ const Home = () => {
                 </div>
 
                 <hr className="my-5" />
+
                 <div className="mt-5">
                   <h4 className="mb-3">Categorias</h4>
                   <ul className="pl-0">
@@ -152,15 +148,18 @@ const Home = () => {
                   </ul>
                 </div>
               </div>
+
               <div className="col-6 col-md-9">
                 <div className="row">
                   <Products col={4} products={products} loading={loading} />
                 </div>
               </div>
+              
             </React.Fragment>
-          ) : (
-            <Products col={4} products={products} loading={loading} />
-          )}
+          )
+          :
+          (<Products col={4} products={products} loading={loading} />)
+        }
         </div>
       </section>
 
