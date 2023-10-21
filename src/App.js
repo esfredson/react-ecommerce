@@ -11,6 +11,9 @@ import Login from "./components/security/Login";
 import Register from "./components/security/Register";
 
 function App() {
+
+  // obtenemos el listado de categorias al mas alto nivel de la aplicacion.
+  // no necesitamos que se muestren en el App, sólo que se almacenen en el store global.
   const dispatch = useDispatch();
 
   useEffect(() => {

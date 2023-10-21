@@ -20,6 +20,7 @@ const Home = () => {
   // seteo a nivel local la variable de estado precio
   const [precio, setPrecio] = useState([1, 10000]);
 
+  // obtengo la lista de categorias del store global
   const { categories } = useSelector((state) => state.category);
 
   // el 'useSelector' productPagination me devuelve los valores
@@ -75,8 +76,11 @@ const Home = () => {
     ));
   }
 
+  // dispara la busqueda de esa categoria seleccionada
   function onChangeCategory(cat) {
-    dispatch(updateCategory({ category: cat.id }));
+    dispatch(updateCategory(
+      { category: cat.id }
+    ));
   }
 
   function onChangeStar(star) {
@@ -109,22 +113,26 @@ const Home = () => {
                   />
                 </div>
 
+                {/* bloque de renderizacion de la lista de categorias */}
                 <hr className="my-5" />
 
                 <div className="mt-5">
                   <h4 className="mb-3">Categorias</h4>
                   <ul className="pl-0">
-                    {categories.map((cat) => (
-                      <li
-                        style={{ cursor: "pointer", listStyleType: "none" }}
-                        key={cat.id}
-                        onClick={() => onChangeCategory(cat)}
-                      >
-                        {cat.nombre}
-                      </li>
-                    ))}
+                    {
+                      categories.map((cat) => (
+                        <li
+                          style={{ cursor: "pointer", listStyleType: "none" }}
+                          key={cat.id}
+                          onClick={() => onChangeCategory(cat)}
+                        >
+                          {cat.nombre}
+                        </li>
+                      ))
+                    }
                   </ul>
                 </div>
+                
 
                 <hr className="my-5" />
                 <div className="mt-5">
@@ -154,7 +162,7 @@ const Home = () => {
                   <Products col={4} products={products} loading={loading} />
                 </div>
               </div>
-              
+
             </React.Fragment>
           )
           :
