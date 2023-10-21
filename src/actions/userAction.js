@@ -30,15 +30,20 @@ export const login = createAsyncThunk(
   }
 );
 
+// creacion del metodo register del action para el usuario
 export const register = createAsyncThunk(
   "user/register",
   async (params, { rejectWithValue }) => {
     try {
+
       const requestConfig = {
         headers: {
+          // para que el request pueda aceptar images
+          // el formato debe ser multipart/form-data
           "Content-Type": "multipart/form-data",
         },
       };
+
       const { data } = await axios.post(
         `/api/v1/usuario/register`,
         params,
@@ -46,24 +51,27 @@ export const register = createAsyncThunk(
       );
 
       localStorage.setItem("token", data.token);
-
       await delayedTimeout(1000);
       return data;
+
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
   }
 );
 
+// metodo para actualizar la data de un usuario
 export const update = createAsyncThunk(
   "user/update",
   async (params, { rejectWithValue }) => {
     try {
+
       const requestConfig = {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       };
+
       const { data } = await axios.post(
         `/api/v1/usuario/update`,
         params,
@@ -71,25 +79,29 @@ export const update = createAsyncThunk(
       );
 
       localStorage.setItem("token", data.token);
-
       await delayedTimeout(1000);
       return data;
+
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
   }
 );
 
+// metodo que me permite cargar la data de un usuario en sesion,
+// es decir, cuando el token de seguridad ya esta almacenado en el browser
 export const loadUser = createAsyncThunk(
   "user/getUser",
   async ({ rejectWithValue }) => {
     try {
       const { data } = axios.get(`/api/v1/usuario`);
 
+      // la data tambien me devuelve un nuevo token
+      // que voy a almacenar en el browser
       localStorage.setItem("token", data.token);
-
       await delayedTimeout(1000);
       return data;
+
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
