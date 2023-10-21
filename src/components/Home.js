@@ -16,40 +16,21 @@ const Home = () => {
 
   const dispatch = useDispatch();
 
-//antes de añadir el componente Loader:
-//const { products } = useSelector((state) => state.products);
-
-//después de añadir el componente Loader:
-//const {products, loading, error} = useSelector((state) => state.products);
-
-
-  
   const [precio, setPrecio] = useState([1, 10000]);
 
   const { categories } = useSelector((state) => state.category);
 
-
-
-  const {
-    products,
-    count,
-    pageIndex,
-    loading,
-    error,
-    resultByPage,
-    search,
-    pageSize,
-    precioMax,
-    precioMin,
-    category,
-    rating,
-  } = useSelector((state) => state.productPagination);
+  // el 'useSelector' productPagination me devuelve los valores
+  // de las variables de estado relacionadas con la paginacion
+  const { products, count, pageIndex, loading, error, resultByPage,
+          search, pageSize, precioMax, precioMin, category, rating,
+        } = useSelector((state) => state.productPagination);
 
   const alert = useAlert(); //creamos un objeto de tipo alert
- 
 
   useEffect(() => {
-    if (error != null) return alert.error(error);  //añadimos esta condicion de control de errores. el input error se obtiene desde el useSelector
+     //añadimos esta condicion de errores cuyo estado se obtiene desde el useSelector
+    if (error != null) return alert.error(error); 
     dispatch(getProductPagination({
         pageIndex: pageIndex,
         pageSize: pageSize,
@@ -61,8 +42,7 @@ const Home = () => {
         rating: rating,
       })
     );
-  }, [
-    dispatch,
+  }, [dispatch,
     error,  //cada vez que cambie el estado 'error' se va a volver a ejecutar la logica del useEffect
     alert,  //cada vez que cambie el estado 'alert' se va a volver a ejecutar la logica del useEffect
     search,
@@ -76,7 +56,9 @@ const Home = () => {
   ]);
 
   function setCurrentPageNo(pageNumber) {
-    dispatch(setPageIndex({ pageIndex: pageNumber }));
+    dispatch(setPageIndex(
+      { pageIndex: pageNumber }
+    ));
   }
 
   function onChangePrecio(precioEvent) {
@@ -94,12 +76,6 @@ const Home = () => {
   function onChangeStar(star) {
     dispatch(updateRating({ rating: star }));
   }
-
-  //esta consicion ya no se necesita porque ya esta contemplada en el componente 'Products'
-  // if(loading)
-  // {
-  //   return (<Loader);
-  // }
 
   return (
     <Fragment>
@@ -188,6 +164,7 @@ const Home = () => {
         </div>
       </section>
 
+      {/* introduccion de las propiedades del componente Pagination */}
       <div className="d-flex justify-content-center mt-5">
         <Pagination
           activePage={pageIndex}

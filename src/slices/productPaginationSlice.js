@@ -3,7 +3,7 @@ import { getProductPagination } from "../actions/productsAction";
 
 // creamos la gestion de estados de la paginacion de productos
 export const initialState = { products: [], loading: false, error: null,
-                              count: 0, pageIndex: 1, pageSize: 4, pageCount: 0, resultByPage: 0,
+                              count: 0, pageIndex: 1, pageSize: 3, pageCount: 0, resultByPage: 0,
                               search: null, precioMax: null, precioMin: null, category: null, rating: null,
                             };
 
