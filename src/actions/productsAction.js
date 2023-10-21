@@ -30,15 +30,22 @@ export const getProductById = createAsyncThunk(
   }
 );
 
+// creo este metodo action para trabajar con la paginacion de productos
 export const getProductPagination = createAsyncThunk(
   "products/getProductPagination",
   async (params, { rejectWithValue }) => {
     try {
       await delayedTimeout(1000);
+
+      // los 'params' nos llegan en formato json. Necesitamos convertirlo a un string
+      // que representa los parametros de la paginacion y que se va a colocar en la url
       params = httpParams(params);
+
       const paramUrl = new URLSearchParams(params).toString();
 
+      // 'paramUrl' por ejemplo, se dibuja asi: ?'pageSize=10&pageIndex=1&categoryId=100'
       var results = axios.get(`/api/v1/product/pagination?${paramUrl}`);
+
       return (await results).data;
     }
     catch (err) {
