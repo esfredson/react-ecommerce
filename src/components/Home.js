@@ -5,7 +5,7 @@ import { getProductPagination } from "../actions/productsAction";
 import { useAlert } from "react-alert";
 import Products from "./products/Products";
 import Pagination from "react-js-pagination";
-import { setPageIndex, updateCategory, updatePrecio, updateRating,} from "../slices/productPaginationSlice";
+import { setPageIndex, updateCategory, updatePrecio, updateRating } from "../slices/productPaginationSlice";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
@@ -26,7 +26,7 @@ const Home = () => {
   // el 'useSelector' productPagination me devuelve los valores
   // de las variables de estado relacionadas con la paginacion
   const { products, count, pageIndex, loading, error, resultByPage,
-          search, pageSize, precioMax, precioMin, category, rating,
+          search, pageSize, precioMax, precioMin, category, rating
         } = useSelector((state) => state.productPagination);
 
   const alert = useAlert(); //creamos un objeto de tipo alert
@@ -83,8 +83,11 @@ const Home = () => {
     ));
   }
 
+  // dispara la busqueda del rating seleccionado (numero de estrellas)
   function onChangeStar(star) {
-    dispatch(updateRating({ rating: star }));
+    dispatch(updateRating(
+      { rating: star }
+    ));
   }
 
   return (
@@ -98,6 +101,7 @@ const Home = () => {
           (
             <React.Fragment>
               <div className="col-6 col-md-3 mt-5 mb-5">
+
                 <div className="px-5">
                   {/* el componente Range es importado desde rc-slider */}
                   <Range
@@ -132,29 +136,31 @@ const Home = () => {
                     }
                   </ul>
                 </div>
-                
 
+                {/* bloque de renderizacion de los ratings obtenidos */}
                 <hr className="my-5" />
+
                 <div className="mt-5">
                   <h4 className="mb-3">Ratings</h4>
 
+                  {/* este bucle va a trabajar 5 veces, pintando cada estrella */}
                   <ul className="pl-0">
-                    {[5, 4, 3, 2, 1].map((star) => (
-                      <li
-                        style={{ cursor: "pointer", listStyleType: "none" }}
-                        key={star}
-                        onClick={() => onChangeStar(star)}
-                      >
-                        <div className="rating-outer">
-                          <div
-                            className="rating-inner"
-                            style={{ width: `${star * 20}%` }}
-                          ></div>
-                        </div>
-                      </li>
-                    ))}
+                    {
+                      [5,4,3,2,1].map(star => (
+                        <li
+                          style={{ cursor: "pointer", listStyleType: "none" }}
+                          key={star}
+                          onClick={() => onChangeStar(star)}
+                        >
+                          <div className="rating-outer">
+                            <div className="rating-inner" style={{width: `${star*20}%`}}></div>
+                          </div>
+                        </li>
+                      ))
+                    }
                   </ul>
                 </div>
+
               </div>
 
               <div className="col-6 col-md-9">
