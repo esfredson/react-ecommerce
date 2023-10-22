@@ -34,6 +34,8 @@ function App() {
             
             {/* agrego la ruta para el login */}
             <Route path="/login" element={<Login />} /> 
+
+             {/* agrego la ruta para el register */}
             <Route path="/register" element={<Register />} />
           </Routes>
         </div>

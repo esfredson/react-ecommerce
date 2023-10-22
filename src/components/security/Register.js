@@ -5,8 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../actions/userAction";
 
+// creamos este nuevo componente security/Register
 const Register = () => {
   const navigate = useNavigate();
+
+  // declaramos la variable local user, con sus atributos o propiedades y su valor inicial.
   const [user, setUser] = useState({
     nombre: "",
     apellido: "",
@@ -16,18 +19,22 @@ const Register = () => {
     password: "",
   });
 
+  //quiero trabajar directamente con las propiedades del objeto user.
+  //para ello procedo a hacer una desestructuración del objeto user.
   const { nombre, apellido, password, telefono, email, username } = user;
 
+  //declaro la variable de estado local para la imagen de perfil
   const [avatar, setAvatar] = useState("");
 
-  const [avatarPreview, setAvatarPreview] = useState(
-    "images/default_avatar.jpg"
-  );
+  //el avatar tiene distintos estados: el avatar que procede del backend
+  //y el avatar que quiero subir para actualizarlo: a este lo llamo avatarPreview
+  const [avatarPreview, setAvatarPreview] = useState("images/default_avatar.jpg");
 
   const alert = useAlert();
 
   const dispatch = useDispatch();
 
+  //necesito obtener valores de estado global que me indiquen si el usuaruio esta en sesion
   const { errores, isAuthenticated } = useSelector((state) => state.security);
 
   useEffect(() => {
@@ -41,46 +48,57 @@ const Register = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
+    // la data se envia al servidor con un tipo multipart form
+    // creamos un objeto formData y lo seteamos con sus valores
     const formData = new FormData();
-    formData.set("nombre", nombre);
-    formData.set("apellido", apellido);
-    formData.set("telefono", telefono);
-    formData.set("email", email);
-    formData.set("username", username);
-    formData.set("password", password);
-    formData.set("foto", avatar);
-
+      formData.set("nombre", nombre);
+      formData.set("apellido", apellido);
+      formData.set("telefono", telefono);
+      formData.set("email", email);
+      formData.set("username", username);
+      formData.set("password", password);
+      formData.set("foto", avatar);
     dispatch(register(formData));
   };
 
   const onChange = (e) => {
+    // logica para tratar el control imagen avatar
     if (e.target.name === "avatar") {
+      // instancio a un objeto que de lectura al archivo imagen
       const reader = new FileReader();
       reader.onload = () => {
+        // cuando la imagen ya se ha cargado (readyState=2)
         if (reader.readyState === 2) {
           setAvatarPreview(reader.result);
           setAvatar(e.target.files[0]);
         }
       };
-
-      reader.readAsDataURL(e.target.files[0]);
-    } else {
+      if(e.target.files[0]) {
+        reader.readAsDataURL(e.target.files[0]);
+      }
+      
+    }
+    else {
+      // logica para el resto de controles distintos al avatar
       setUser({ ...user, [e.target.name]: e.target.value });
     }
   };
 
   return (
+    // iniciamos con Fragment y Metadata
     <Fragment>
       <MetaData title={"Registro de usuario"} />
       <div className="row wrapper">
         <div className="col-10 col-lg-5">
+
           <form
             className="shadow-lg"
             encType="multipart/form-data"
             onSubmit={submitHandler}
           >
             <h1 className="mb-3">Registrar Usuario</h1>
+
+            {/* caja de texto nombre */}
             <div className="form-group">
               <label htmlFor="nombre_field">Nombre</label>
               <input
@@ -92,6 +110,8 @@ const Register = () => {
                 onChange={onChange}
               />
             </div>
+
+            {/* caja de texto apellido */}
             <div className="form-group">
               <label htmlFor="apellido_field">Apellido</label>
               <input
@@ -103,6 +123,8 @@ const Register = () => {
                 onChange={onChange}
               />
             </div>
+
+            {/* caja de texto telefono */}
             <div className="form-group">
               <label htmlFor="telefono_field">Telefono</label>
               <input
@@ -114,6 +136,8 @@ const Register = () => {
                 onChange={onChange}
               />
             </div>
+
+            {/* caja de texto username */}
             <div className="form-group">
               <label htmlFor="username_field">Username</label>
               <input
@@ -126,6 +150,7 @@ const Register = () => {
               />
             </div>
 
+            {/* caja de texto email */}
             <div className="form-group">
               <label htmlFor="email_field">Email</label>
               <input
@@ -138,6 +163,7 @@ const Register = () => {
               />
             </div>
 
+            {/* caja de texto password */}
             <div className="form-group">
               <label htmlFor="password_field">Password</label>
               <input
@@ -150,6 +176,7 @@ const Register = () => {
               />
             </div>
 
+            {/* control de upload de imagenes */}
             <div className="form-group">
               <label htmlFor="avatar_upload">Avatar</label>
               <div className="d-flex align-items-center">
@@ -178,6 +205,7 @@ const Register = () => {
                 </div>
               </div>
             </div>
+
             <button
               id="register_button"
               type="submit"
@@ -185,6 +213,7 @@ const Register = () => {
             >
               Registrar
             </button>
+
           </form>
         </div>
       </div>
