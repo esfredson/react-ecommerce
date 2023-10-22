@@ -1,11 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  login,
-  register,
-  update,
-  updatePassword,
-  loadUser,
-} from "../actions/userAction";
+import { login, register, update, updatePassword, loadUser } from "../actions/userAction";
 import { saveAddressInfo } from "../actions/cartAction";
 
 const initialState = {
@@ -22,6 +16,7 @@ export const securitySlice = createSlice({
   initialState,
   reducers: {
     logout: (state, action) => {
+      // para salir de sesion elimino el token de seguridad
       localStorage.removeItem("token");
       state.isAuthenticated = false;
       state.user = null;
@@ -39,6 +34,8 @@ export const securitySlice = createSlice({
     },
   },
   extraReducers: {
+    // variables de estado globales remotas
+    // bloque función login usuario
     [login.pending]: (state) => {
       state.loading = true;
       state.errores = [];
@@ -56,7 +53,7 @@ export const securitySlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
     },
-
+    // bloque función register usuario
     [register.pending]: (state) => {
       state.loading = true;
       state.errores = [];
@@ -73,7 +70,7 @@ export const securitySlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
     },
-
+    // bloque función update para actualizar el perfil del usuario
     [update.pending]: (state) => {
       state.loading = true;
       state.errores = [];
@@ -83,7 +80,7 @@ export const securitySlice = createSlice({
       state.user = payload;
       state.errores = [];
       state.isAuthenticated = true;
-      state.isUpdated = true;
+      state.isUpdated = true; // isUpdated pasa a ser true
     },
     [update.rejected]: (state, action) => {
       state.loading = false;
@@ -91,7 +88,7 @@ export const securitySlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
     },
-
+    // bloque función updatePassword para actualizar el password del usuario
     [updatePassword.pending]: (state) => {
       state.loading = true;
       state.errores = [];
@@ -106,7 +103,7 @@ export const securitySlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
     },
-
+    // bloque función loadUser para cargar la información del usuario
     [loadUser.pending]: (state) => {
       state.loading = true;
       state.errores = [];
@@ -115,7 +112,7 @@ export const securitySlice = createSlice({
       state.loading = false;
       state.user = payload;
       state.errores = [];
-      state.direccionEnvio = payload.direccionEnvio;
+      state.direccionEnvio = payload.direccionEnvio; // necesito su direccion de envio
     },
     [loadUser.rejected]: (state, action) => {
       state.loading = false;
@@ -123,7 +120,7 @@ export const securitySlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
     },
-
+    // bloque función saveAddressInfo para almacenar la dirección del usuario
     [saveAddressInfo.pending]: (state) => {
       state.loading = true;
       state.errores = [];
@@ -132,7 +129,7 @@ export const securitySlice = createSlice({
       state.loading = false;
       state.isUpdated = true;
       state.errores = [];
-      state.direccionEnvio = payload.direccionEnvio;
+      state.direccionEnvio = payload;
     },
     [saveAddressInfo.rejected]: (state, action) => {
       state.loading = false;

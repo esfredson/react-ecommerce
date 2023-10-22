@@ -11,7 +11,7 @@ export default configureStore({
     product: productByIdReducer, // registramos este nuevo reducer
     productPagination: productPaginationReducer, // registramos el pagination reducer
     category: categoryReducer, // registramos el category reducer
-    security: securityReducer,
+    security: securityReducer  // registramos el security reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),
