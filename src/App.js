@@ -22,12 +22,10 @@ function App() {
 
   useEffect(() => {
     dispatch(getCategories({}));
-
     if(token)
     {
       dispatch(loadUser({}));
     }
-
   }, [dispatch, token]);
 
 

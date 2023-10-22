@@ -94,7 +94,7 @@ export const loadUser = createAsyncThunk(
   "user/getUser",
   async ({ rejectWithValue }) => {
     try {
-      const { data } = axios.get(`/api/v1/usuario`);
+      const { data } = await axios.get(`/api/v1/usuario`);
 
       // la data tambien me devuelve un nuevo token
       // que voy a almacenar en el browser

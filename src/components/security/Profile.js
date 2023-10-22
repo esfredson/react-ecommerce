@@ -18,7 +18,7 @@ const Profile = () => {
         <div className="row justify-content-around mt-5 user-info">
             <div className="col-12 col-md-3">
                 <figure className='avatar avatar-profile'>
-                    <img className="rounded-circle img-fluid" src={user && user.avatar} alt={user.nombre} />
+                    <img className="rounded-circle img-fluid" src={user && user.avatar} alt="" />
                 </figure>
                 <Link
                     to="#"
