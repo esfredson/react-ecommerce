@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { getCategories } from "./actions/categoryAction";
 import Login from "./components/security/Login";
 import Register from "./components/security/Register";
+import Profile from "./components/security/Profile";
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
 
              {/* agrego la ruta para el register */}
             <Route path="/register" element={<Register />} />
+            <Route path="/me" element={<Profile />} />
           </Routes>
         </div>
 
