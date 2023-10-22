@@ -8,12 +8,10 @@ const Profile = () => {
 
     const {user, loading} = useSelector(state=> state.security);
 
-    if(loading) return (<Loader />);
-
-
-
-
-
+    if(loading) {
+        return (<Loader />);
+    }
+    
   return (
     <Fragment>
         <h2 class="mt-5 ml-5">Mi Perfil</h2>
@@ -22,9 +20,12 @@ const Profile = () => {
                 <figure class='avatar avatar-profile'>
                     <img class="rounded-circle img-fluid" src={user && user.avatar} alt={user.nombre} />
                 </figure>
-                <a href="#" id="edit_profile" class="btn btn-primary btn-block my-5">
-                    Editar Perfil
-                </a>
+                <Link
+                    to="#"
+                    id="edit_profile"
+                    class="btn btn-primary btn-block my-5">
+                        Editar Perfil
+                </Link>
             </div>
      
             <div class="col-12 col-md-5">

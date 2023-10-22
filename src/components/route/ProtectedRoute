@@ -6,9 +6,13 @@ import { parseToken } from "../../utilities/parseToken";
 const ProtectedRoute = ({existsRoles}) => {
     const token = localStorage.getItem('token');
     
-    if(!token) return <Navigate to='/login' />;
+    if(!token) {
+        return <Navigate to='/login' />;
+    } 
 
-    if(!existsRoles) return <Outlet />;
+    if(!existsRoles) {
+        return <Outlet />;
+    }
 
     const payload = parseToken(token);
 
