@@ -14,21 +14,21 @@ const Profile = () => {
     
   return (
     <Fragment>
-        <h2 class="mt-5 ml-5">Mi Perfil</h2>
-        <div class="row justify-content-around mt-5 user-info">
-            <div class="col-12 col-md-3">
-                <figure class='avatar avatar-profile'>
-                    <img class="rounded-circle img-fluid" src={user && user.avatar} alt={user.nombre} />
+        <h2 className="mt-5 ml-5">Mi Perfil</h2>
+        <div className="row justify-content-around mt-5 user-info">
+            <div className="col-12 col-md-3">
+                <figure className='avatar avatar-profile'>
+                    <img className="rounded-circle img-fluid" src={user && user.avatar} alt={user.nombre} />
                 </figure>
                 <Link
                     to="#"
                     id="edit_profile"
-                    class="btn btn-primary btn-block my-5">
+                    className="btn btn-primary btn-block my-5">
                         Editar Perfil
                 </Link>
             </div>
      
-            <div class="col-12 col-md-5">
+            <div className="col-12 col-md-5">
                  <h4>Nombre</h4>
                  <p>{user && user.nombre}</p>
 
@@ -48,7 +48,7 @@ const Profile = () => {
                     user && !user.roles.includes('ADMIN') && (
                         <Link
                             to="/orders/me"
-                            class="btn btn-danger btn-block mt-5">
+                            className="btn btn-danger btn-block mt-5">
                                 Mis Ordenes
                         </Link>
                     )
@@ -56,7 +56,7 @@ const Profile = () => {
 
                 <Link
                     to="/password/update"
-                    class="btn btn-primary btn-block mt-3">
+                    className="btn btn-primary btn-block mt-3">
                         Cambiar Password
                 </Link>
             </div>

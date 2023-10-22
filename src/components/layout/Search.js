@@ -17,7 +17,8 @@ const Search = () => {
       dispatch(searchPagination(
         { search: keyword }
       ));
-    } else {
+    }
+    else {
       dispatch(resetPagination());
     }
     navigate("/");
