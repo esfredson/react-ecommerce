@@ -32,7 +32,8 @@ function App() {
             {/* agrego esta nueva ruta para obtener el detalle de producto */}
             <Route path="/product/:id" element={<ProductDetail />} />
             
-            <Route path="/login" element={<Login />} />
+            {/* agrego la ruta para el login */}
+            <Route path="/login" element={<Login />} /> 
             <Route path="/register" element={<Register />} />
           </Routes>
         </div>
