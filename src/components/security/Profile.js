@@ -21,7 +21,7 @@ const Profile = () => {
                     <img className="rounded-circle img-fluid" src={user && user.avatar} alt="" />
                 </figure>
                 <Link
-                    to="#"
+                    to="/me/update"
                     id="edit_profile"
                     className="btn btn-primary btn-block my-5">
                         Editar Perfil

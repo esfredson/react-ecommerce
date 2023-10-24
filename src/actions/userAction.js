@@ -65,23 +65,19 @@ export const update = createAsyncThunk(
   "user/update",
   async (params, { rejectWithValue }) => {
     try {
-
       const requestConfig = {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       };
-
-      const { data } = await axios.post(
+      const { data } = await axios.put(
         `/api/v1/usuario/update`,
         params,
         requestConfig
       );
-
       localStorage.setItem("token", data.token);
       await delayedTimeout(1000);
       return data;
-
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
