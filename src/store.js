@@ -4,14 +4,16 @@ import { productByIdReducer } from "./slices/productByIdSlice";
 import { productPaginationReducer } from "./slices/productPaginationSlice";
 import { categoryReducer } from "./slices/categorySlice";
 import { securityReducer } from "./slices/securitySlice";
+import { forgotPasswordReducer } from "./slices/forgotPasswordSlice";
 
 export default configureStore({
   reducer: {
     products: productsReducer,
-    product: productByIdReducer, // registramos este nuevo reducer
-    productPagination: productPaginationReducer, // registramos el pagination reducer
-    category: categoryReducer, // registramos el category reducer
-    security: securityReducer  // registramos el security reducer
+    product: productByIdReducer,
+    productPagination: productPaginationReducer,
+    category: categoryReducer,
+    security: securityReducer,
+    forgotPassword: forgotPasswordReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),
