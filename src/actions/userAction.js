@@ -166,24 +166,14 @@ export const resetPassword = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-
       // creo un objeto de tipo request
-      const request = {
-        email,
-        password,
-        confirmPassword,
-        token,
-      };
-
+      const request = { email, password, confirmPassword, token };
       const { data } = await axios.post(
         `/api/v1/usuario/resetpassword`,
-        // ya no es params sino el objeto request creado arriba
         request,
         requestConfig
       );
-
       return data;
-
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
